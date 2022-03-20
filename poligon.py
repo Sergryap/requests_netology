@@ -33,7 +33,7 @@ if __name__ == '__main__':
     FILE_DIR = "loadfiles"
     FILE_PATH = os.path.join(BASE_PATH, FILE_DIR)
     YA_DIR = 'test1/10'
-    TOKEN = "AQAAAAAW2WtxAADLW5emCl9bGk37i4bBKuc5IhA"
+    TOKEN = ""
 
     uploader = YaUploader(TOKEN)
     uploader.upload(FILE_PATH, YA_DIR)
