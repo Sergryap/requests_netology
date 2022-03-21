@@ -33,7 +33,7 @@ if __name__ == '__main__':
     FILE_DIR = "loadfiles"
     FILE_PATH = os.path.join(BASE_PATH, FILE_DIR)
     YA_DIR = 'test1/14'  # Дирректория для загрузки на я-диск
-    TOKEN = "..."
+    TOKEN = ""
 
     uploader = YaUploader(TOKEN)
     uploader.upload(FILE_PATH, YA_DIR)

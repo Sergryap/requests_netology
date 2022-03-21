@@ -3,17 +3,19 @@ import json
 import datetime as dtm
 
 
-def get_dates():
-    """Находит даты в секундах с начала вчерашнего дня по текущее время"""
-    dt = dtm.datetime.today()
-    second_now = int(dt.timestamp())
-    second_yesterday = second_now - 86400
-    second_yesterday -= second_yesterday % 86400
-    return second_yesterday, second_now
+def get_dates(days: int):
+    """Находит даты в секундах за последние days дней по текущее время"""
+    dt = dtm.datetime.now()
+    sec_now = int(dt.timestamp())
+    sec_yesterday = sec_now - sec_now % 86400 - 86400 * (days - 1)
+    return sec_yesterday, sec_now
 
 
-def out_questions(url: str, par: dict):
-    """Вывод вопросов"""
+def out_questions(url: str, days: int):
+    """Вывод вопросов за последние days дней по текущее время"""
+    par = {'fromdate': get_dates(days)[0], 'todate': get_dates(days)[1], 'order': 'desc', 'sort': 'votes',
+           'tagged': 'Python',
+           'site': 'stackoverflow'}
     res = requests.get(url, params=par)
     for item in res.json()['items']:
         print(item['title'])
@@ -21,7 +23,5 @@ def out_questions(url: str, par: dict):
 
 if __name__ == '__main__':
     URL = 'https://api.stackexchange.com/2.3/questions'
-    params = {'fromdate': get_dates()[0], 'todate': get_dates()[1], 'order': 'desc', 'sort': 'votes',
-              'tagged': 'Python',
-              'site': 'stackoverflow'}
-    out_questions(URL, params)
+    DAYS = 2
+    out_questions(URL, DAYS)
