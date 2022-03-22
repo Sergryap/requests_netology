@@ -32,15 +32,15 @@ class YaUploader:
         """Метод загружает файлы из папки file_path в папку ya_dir на яндекс дискe"""
         self.__create_folder_path(ya_dir)
         file_list = os.listdir(file_path)
-        print('Загрузка фалов: ', end="")
+        print('Загрузка файлов: ', end="")
         for file in file_list:
             file_list_path = os.path.join(file_path, file)
+            print(f'{file} ', end='')
             res = requests.get(f"{YaUploader.URL}/upload?path={ya_dir}/{file}&overwrite=true",
                                headers=self.headers)
             link = res.json()['href']
             with open(file_list_path, 'rb') as f:
                 requests.put(link, files={'file': f})
-            print(f'{file} ', end='')
 
 
 if __name__ == '__main__':
