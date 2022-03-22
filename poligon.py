@@ -21,10 +21,10 @@ class YaUploader:
         print('Cоздана папка: ', end='')
         for i, folder in enumerate(gen_folders):
             if i == 0:
-                dir = folder
+                directory = folder
             else:
-                dir = f"{dir}/{folder}"
-            self.__create_folder(dir)
+                directory = f"{directory}/{folder}"
+            self.__create_folder(directory)
             print(f'{folder}/', end='')
         print()
 
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     BASE_PATH = os.getcwd()
     FILE_DIR = "loadfiles"
     FILE_PATH = os.path.join(BASE_PATH, FILE_DIR)
-    YA_DIR = 'test1/test2/test3/test4'  # Дирректория для загрузки на я-диск
+    YA_DIR = 'test1/test2/test3'  # Дирректория для загрузки на я-диск
     TOKEN = ""
 
     uploader = YaUploader(TOKEN)
